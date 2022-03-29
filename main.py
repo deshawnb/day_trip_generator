@@ -25,43 +25,39 @@ def user_input():
             print('invalid input')
 
 def select_destination():
-    city = randomize_list(destinations)
-    print(f'your destination is {city}, is this ok?')
-    has_acceped = user_input()
-    if has_acceped == False:
-        select_destination()
-    else:
-        print(f'your destination is now {city} now!')
+    has_acceped = False
+    while has_acceped == False:
+        city = randomize_list(destinations)
+        print(f'your destination is {city}, is this ok?')
+        has_acceped = user_input()
+    print(f'your destination is now {city} now!')
     return city
 
 def select_transportation():
-    ride = randomize_list(transportation)
-    print(f'your transportation will be by {ride}, is this ok?')
-    has_acceped = user_input()
-    if has_acceped == False:
-        select_transportation()
-    else:
-        print(f'your transportation will be by {ride} now!')
+    has_acceped = False
+    while has_acceped == False:
+        ride = randomize_list(transportation)
+        print(f'your transportation will be by {ride}, is this ok?')
+        has_acceped = user_input()
+    print(f'your transportation will be by {ride} now!')
     return ride
 
 def select_restuarant():
-    food = randomize_list(restaurants)
-    print(f'you will go to a {food} for food, is this ok?')
-    has_acceped = user_input()
-    if has_acceped == False:
-        select_restuarant()
-    else:
-        print(f'your going to a {food} to eat now!')
+    has_acceped = False
+    while has_acceped == False:
+        food = randomize_list(restaurants)
+        print(f'you will go to a {food} for food, is this ok?')
+        has_acceped = user_input()
+    print(f'your going to a {food} to eat now!')
     return food
 
 def select_entertainment():
-    thing_to_do = randomize_list(entertainment)
-    print(f'your entertainment will be {thing_to_do}, is this ok?')
-    has_acceped = user_input()
-    if has_acceped == False:
-        select_entertainment()
-    else:
-        print(f'{thing_to_do} will now be your activity in your trip!')
+    has_acceped = False
+    while has_acceped == False:
+        thing_to_do = randomize_list(entertainment)
+        print(f'your entertainment will be {thing_to_do}, is this ok?')
+        has_acceped = user_input()
+    print(f'{thing_to_do} will now be your activity in your trip!')
     return thing_to_do
 
 def full_trip():
@@ -72,19 +68,25 @@ def full_trip():
     trip_confirmation(city, ride, food, thing_to_do)
 
 def trip_confirmation(city, ride, food, thing_to_do):
-    print(f'In your trip you will go to {city} and travel around by {ride}.')
-    print(f'while there you will eat at a {food} and go {thing_to_do} for fun, is this ok?')
-    has_acceped = user_input()
-    if has_acceped == False:
-        trip_recomfirmation(city, ride, food, thing_to_do)
-    else:
-        print(f'have a safe trip! ')
+    has_acceped = False
+    while has_acceped == False:
+        print(f'In your trip you will go to {city} and travel around by {ride}.')
+        print(f'while there you will eat at a {food} and go {thing_to_do} for fun, is this ok?')
+        has_acceped = user_input()
+        if has_acceped == False:
+            trip_recomfirmation(city, ride, food, thing_to_do)
+            break
+        else:
+            print(f'Have a safe trip at {city}!')
 
 def trip_recomfirmation(city, ride, food, thing_to_do):
     print('what do you want to change?')
     user_input = input('plese enter c - city, r - ride, f - food, e - entertainment, or a - all: ')
     if user_input == 'a':
-        full_trip()
+        city = select_destination()
+        ride = select_transportation()
+        food = select_restuarant()
+        thing_to_do = select_entertainment()
         pass
     elif user_input == 'c':
         city = select_destination()
